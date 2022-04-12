@@ -2,7 +2,8 @@
 #include <string>
 
 using namespace std;
-
+const int low=48;
+const int high=57;
 namespace zich{
 
     int Matrix::sumMat(const Matrix &curr, const Matrix &other){
@@ -254,22 +255,24 @@ namespace zich{
     istream& operator>> (std::istream& input , Matrix& m){
     char singelchar = 0;
     string allInput;
-    while (singelchar != '\n'){
-        singelchar = input.get();
-        allInput += singelchar;
-    }
+    //while (singelchar != '\n'){
+    getline(input,allInput);
+    //}
     vector<double>init;
     unsigned int countrow=0;
     unsigned int countcol=0;
     unsigned int j=0;
     for(unsigned int i=0;i<(int)allInput.length();i++){
-        if(allInput[i]=='[' && (allInput[i+1]<48 || allInput[i+1]>57)){
+        if(allInput[i]=='[' && (allInput[i+1]<low || allInput[i+1]>high)){
             throw invalid_argument("wrong input");
         }
         if(allInput[i]==',' && allInput[i+1]!=' '){
             throw invalid_argument("wrong input");
         }
-        if(allInput[i]==']' && (allInput[i+1]!=',' && allInput[i+1]!='\n')){
+        // if(allInput[i]==']' && (allInput[i+1]!=',' && allInput[i+1]!='\n')){
+        //     throw invalid_argument("wrong input");
+        // }
+        if(allInput[i]==' ' && allInput[i+1]==' '){
             throw invalid_argument("wrong input");
         }
         if(allInput[i]==']'){
@@ -288,14 +291,14 @@ namespace zich{
     unsigned int i = 0;  
     string token1;
     
-    while (( pos = allInput.find (" ")) != std::string::npos)  
-    {  
-    token1 = allInput.substr(0, pos);
-    if(token1!="]" || token1!="," ){
-        m.myMatrix.at(i)=24.4;
-    }   
-    allInput.erase(0, pos + 1);  /* erase() function store the current positon and move to next token. */   
-    }  
+    // while (( pos = allInput.find (" ")) != std::string::npos)  
+    // {  
+    // token1 = allInput.substr(0, pos);
+    // if(token1!="]" || token1!="," ){
+    //     m.myMatrix.at(i)=24.4;
+    // }   
+    // allInput.erase(0, pos + 1);  /* erase() function store the current positon and move to next token. */   
+    // }  
         m.row=countrow;
         m.col=countcol;
         return input;
